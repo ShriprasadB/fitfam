@@ -178,7 +178,7 @@
 
   <header>
     <h1>Fit Fam Privacy Policy</h1>
-    <p class="dateline">Last updated 1 September 2026</p>
+    <p class="dateline">Last updated 7 September 2026</p>
 
     <div class="summary">
       <p><strong>The short version.</strong> Fit Fam counts your steps and shares your progress with the people you are competing against. That is all it is for.</p>
@@ -234,8 +234,16 @@
     </div>
 
     <h3>Motion &amp; Fitness</h3>
-    <p>Fit Fam reads your step count from the iPhone's motion coprocessor, using a read-only interface. It cannot write steps, and it does not read your Health data. If you decline the Motion &amp; Fitness permission the app has nothing to count.</p>
-    <p>Alongside each stretch of walking the app stores what the hardware reported about it — distance, cadence, the iPhone's own classification of the activity, and whether the clock and the hardware agreed. This is used to work out whether steps were really walked, so that challenges are fair. It stays with your account and is not analysed for any other purpose.</p>
+    <p>Fit Fam reads your step count from the iPhone's motion coprocessor, using a read-only interface. It cannot write steps, and no other app can write steps into it either — which is what makes the numbers hard to fake. If you decline the Motion &amp; Fitness permission the app has nothing to count.</p>
+    <p>Alongside each stretch of walking the app stores what the hardware reported about it — distance, cadence, altitude gained, the iPhone's own classification of the activity, and whether the clock and the hardware agreed. This is used to work out whether steps were really walked, so that challenges are fair. This detailed record stays on your iPhone and is not uploaded; what reaches your challenges is your step total.</p>
+
+    <h3>Apple Health and Apple Watch</h3>
+    <p>If — and only if — you turn on <strong>Apple Watch calories</strong> in Profile, Fit Fam asks permission to read one thing from Apple Health: <strong>active energy</strong>, the calories an Apple Watch measured from your heart rate. It is used to show a better calorie figure than the app can estimate from steps alone.</p>
+    <p>Active energy is the only Health data type the app ever requests. Access is read-only: <strong>Fit Fam never writes anything to Apple Health.</strong> The figure is used on your iPhone to work out one number on screen — it is never uploaded, never stored against your account, and never shown to anyone else in your challenges. Turning the switch off stops the reading and discards what was loaded, and declining it changes nothing else in the app.</p>
+    <p>Health data is never used to decide a challenge. Challenges are scored on steps, which always come from the motion chip.</p>
+
+    <h3>Information you enter yourself</h3>
+    <p>On a treadmill you can tell the app the incline, because a moving belt gains no height and no sensor can detect it. That figure affects your calorie estimate only — it cannot change your steps, your distance, or anything a challenge is decided on — and it stays on your iPhone with the rest of your activity history.</p>
   </section>
 
   <section>
@@ -245,6 +253,7 @@
       <li><strong>No selling or sharing.</strong> Your data is not sold, rented, or passed to data brokers.</li>
       <li><strong>No third-party analytics.</strong> There is no analytics SDK in the app.</li>
       <li><strong>No location.</strong> Fit Fam does not ask for or use GPS. Distance is worked out from your steps and your stride, which is why it keeps working with the phone in a pocket and no signal.</li>
+      <li><strong>No writing to Apple Health.</strong> Fit Fam can read one figure from Health if you ask it to, and it puts nothing back. Your Health record is not changed by using this app.</li>
     </ul>
   </section>
 
@@ -262,6 +271,7 @@
     <h2><span class="num">5</span>Where the data is kept</h2>
     <p>Fit Fam uses <strong>Firebase</strong>, run by Google LLC, for sign-in, storage and syncing between phones. Your data is stored on Google's servers under that service, and Google processes it on the app's behalf. Google's own handling of it is described in the <a href="https://firebase.google.com/support/privacy" rel="noopener">Firebase privacy documentation</a>.</p>
     <p>Steps and history are also kept on your own iPhone, so the app works without a connection.</p>
+    <p>Some things never leave it at all: the detailed record of each stretch of walking, any treadmill incline you declared, and anything read from Apple Health are held on your iPhone only and are not sent to Firebase or anywhere else.</p>
     <p>Data is kept for as long as you have an account. There is no fixed retention period, because a challenge from last year is part of your history until you decide otherwise.</p>
   </section>
 
