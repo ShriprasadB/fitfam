@@ -7,45 +7,59 @@
 <title>Fit Fam Privacy Policy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&family=Public+Sans:wght@400;500;600&display=swap">
 
 <style>
-  :root {
-    --ground: #F7F8F6;
-    --surface: #FFFFFF;
-    --ink: #14201C;
-    --muted: #4E5D57;
-    --faint: #83908A;
-    --line: #DDE3DF;
-    --accent: #0E8A5F;
-    --sunk: #EEF1EE;
+  /* ---------------------------------------------------------------
+     A policy page, not a landing page. The job is that somebody can
+     find one clause and believe it, so the work goes into hierarchy
+     and rhythm rather than ornament. Nothing on this page animates:
+     a legal document that moves reads as a sales pitch.
+     --------------------------------------------------------------- */
 
-    --display: "Fraunces", Georgia, serif;
-    --body: "Public Sans", system-ui, -apple-system, sans-serif;
+  :root {
+    --ground: #F3F6F3;
+    --surface: #FFFFFF;
+    --ink: #0E1A16;
+    --muted: #46564F;
+    --faint: #7C8B84;
+    --line: #DCE4DF;
+    --hairline: #E8EDE9;
+    --accent: #0A7A52;
+    --accent-wash: #E4F1EA;
+    --sunk: #ECF1ED;
+
+    --display: "Fraunces", Georgia, "Times New Roman", serif;
+    --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --ground: #101614;
-      --surface: #171F1C;
-      --ink: #E8EFEA;
-      --muted: #A9B7B0;
-      --faint: #71807A;
-      --line: #2A3632;
-      --accent: #3DD68C;
-      --sunk: #1D2724;
+      --ground: #0D1412;
+      --surface: #151E1B;
+      --ink: #E9F1EC;
+      --muted: #A5B4AD;
+      --faint: #6E7D77;
+      --line: #263230;
+      --hairline: #1E2926;
+      --accent: #46D999;
+      --accent-wash: #16281F;
+      --sunk: #131C19;
     }
   }
 
   :root[data-theme="dark"] {
-    --ground: #101614;
-    --surface: #171F1C;
-    --ink: #E8EFEA;
-    --muted: #A9B7B0;
-    --faint: #71807A;
-    --line: #2A3632;
-    --accent: #3DD68C;
-    --sunk: #1D2724;
+    --ground: #0D1412;
+    --surface: #151E1B;
+    --ink: #E9F1EC;
+    --muted: #A5B4AD;
+    --faint: #6E7D77;
+    --line: #263230;
+    --hairline: #1E2926;
+    --accent: #46D999;
+    --accent-wash: #16281F;
+    --sunk: #131C19;
   }
 
   * { box-sizing: border-box; }
@@ -55,119 +69,260 @@
     background: var(--ground);
     color: var(--ink);
     font-family: var(--body);
-    font-size: 16px;
-    line-height: 1.65;
+    font-size: 17px;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   .wrap {
-    max-width: 40rem;
+    max-width: 44rem;
     margin: 0 auto;
-    padding: clamp(2rem, 6vw, 4rem) clamp(1.1rem, 4vw, 2rem) 5rem;
+    padding: clamp(2.5rem, 7vw, 5rem) clamp(1.2rem, 5vw, 2rem) 5rem;
   }
 
-  header { margin-bottom: 2.5rem; }
+  /* ---- Masthead ---- */
+
+  header { margin-bottom: 3.5rem; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .eyebrow::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
 
   h1 {
     font-family: var(--display);
-    font-weight: 600;
-    font-size: clamp(1.9rem, 5vw, 2.6rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    font-weight: 700;
+    font-variation-settings: "opsz" 144;
+    font-size: clamp(2.3rem, 7vw, 3.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
     margin: 0;
     text-wrap: balance;
   }
 
   .dateline {
-    margin: 0.6rem 0 0;
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.06em;
     color: var(--faint);
-    font-size: 0.85rem;
+    margin: 1rem 0 0;
   }
 
   .summary {
-    margin: 1.5rem 0 0;
-    padding: 1.15rem 1.25rem;
+    margin: 2rem 0 0;
+    padding: 1.4rem 1.5rem;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-left: 3px solid var(--accent);
-    border-radius: 3px;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.03);
     color: var(--muted);
+    font-size: 1rem;
   }
 
-  .summary p { margin: 0 0 0.6rem; }
+  .summary p { margin: 0 0 0.7rem; }
   .summary p:last-child { margin-bottom: 0; }
   .summary strong { color: var(--ink); font-weight: 600; }
 
-  section { margin-top: 2.5rem; }
+  /* The four refusals, surfaced before the detail that proves them.
+     Every one of these is stated in full in section 3. */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .chips li {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--accent);
+    background: var(--accent-wash);
+    border-radius: 999px;
+    padding: 0.3rem 0.7rem;
+    white-space: nowrap;
+  }
+
+  /* ---- Sections ---- */
+
+  section {
+    position: relative;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--hairline);
+  }
 
   h2 {
     font-family: var(--display);
     font-weight: 600;
-    font-size: 1.3rem;
-    letter-spacing: -0.01em;
-    margin: 0 0 0.75rem;
+    font-variation-settings: "opsz" 40;
+    font-size: 1.45rem;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin: 0 0 1rem;
     text-wrap: balance;
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
   }
 
   h2 .num {
-    font-family: var(--body);
-    font-size: 0.78rem;
+    flex: none;
+    font-family: var(--mono);
+    font-size: 0.72rem;
     font-weight: 600;
+    font-variant-numeric: tabular-nums;
     color: var(--accent);
-    margin-right: 0.55rem;
-    vertical-align: 0.18em;
     letter-spacing: 0.04em;
   }
 
-  h3 {
-    font-size: 0.98rem;
-    font-weight: 600;
-    margin: 1.4rem 0 0.4rem;
+  /* On a wide screen the numbers step down the margin, so the page can
+     be scanned by clause the way a policy is actually referred to. */
+  @media (min-width: 60rem) {
+    section { padding-left: 4rem; }
+    h2 { display: block; }
+    h2 .num {
+      position: absolute;
+      left: 0;
+      top: 2.35rem;
+      font-size: 0.78rem;
+    }
   }
 
-  p { margin: 0 0 0.9rem; color: var(--muted); }
+  h3 {
+    font-family: var(--body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 2rem 0 0.6rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--accent);
+  }
+
+  p { margin: 0 0 1rem; color: var(--muted); }
   p:last-child { margin-bottom: 0; }
 
-  ul { margin: 0 0 0.9rem; padding-left: 1.1rem; color: var(--muted); }
-  li { margin-bottom: 0.45rem; }
+  ul { margin: 0 0 1rem; padding-left: 0; list-style: none; }
+  section > ul > li {
+    position: relative;
+    margin-bottom: 0.8rem;
+    padding-left: 1.4rem;
+    color: var(--muted);
+  }
+  section > ul > li::before {
+    content: "";
+    position: absolute;
+    left: 0.15rem;
+    top: 0.72em;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.55;
+  }
   li strong { color: var(--ink); font-weight: 600; }
 
-  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
-  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+  a {
+    color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
 
-  .table-wrap { overflow-x: auto; margin: 0 0 0.9rem; }
+  /* ---- The collection table ---- */
+
+  .table-wrap {
+    overflow-x: auto;
+    margin: 0 0 1rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+  }
 
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.92rem;
-    min-width: 24rem;
+    font-size: 0.94rem;
+    min-width: 26rem;
   }
 
   th, td {
     text-align: left;
-    padding: 0.6rem 0.7rem;
-    border-bottom: 1px solid var(--line);
+    padding: 0.8rem 1rem;
     vertical-align: top;
   }
 
-  th {
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
+  thead th {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--faint);
     font-weight: 600;
+    background: var(--sunk);
+    border-bottom: 1px solid var(--line);
   }
 
-  td:first-child { color: var(--ink); font-weight: 500; white-space: nowrap; }
+  tbody tr + tr td { border-top: 1px solid var(--hairline); }
+  td:first-child { color: var(--ink); font-weight: 600; }
   td:last-child { color: var(--muted); }
 
+  @media (min-width: 34rem) {
+    td:first-child { white-space: nowrap; }
+  }
+
+  /* ---- Footer ---- */
+
   footer {
-    margin-top: 3rem;
-    padding-top: 1.25rem;
+    margin-top: 4rem;
+    padding-top: 1.5rem;
     border-top: 1px solid var(--line);
     color: var(--faint);
-    font-size: 0.85rem;
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+  }
+
+  /* A policy is a thing people print and file. */
+  @media print {
+    :root {
+      --ground: #FFF; --surface: #FFF; --ink: #000;
+      --muted: #222; --faint: #555; --line: #BBB; --hairline: #DDD;
+      --accent: #000; --accent-wash: #FFF; --sunk: #F4F4F4;
+    }
+    .wrap { max-width: none; padding: 0; }
+    section { break-inside: avoid; padding-left: 0; }
+    h2 .num { position: static; }
+    .chips { display: none; }
+    a { text-decoration: underline; }
   }
 </style>
 </head>
@@ -177,6 +332,7 @@
 <div class="wrap">
 
   <header>
+    <p class="eyebrow">Fit Fam &middot; Privacy</p>
     <h1>Fit Fam Privacy Policy</h1>
     <p class="dateline">Last updated 7 September 2026</p>
 
@@ -184,6 +340,14 @@
       <p><strong>The short version.</strong> Fit Fam counts your steps and shares your progress with the people you are competing against. That is all it is for.</p>
       <p>Nothing is sold, nothing is shared with advertisers, and there are no third-party trackers or analytics in the app. You can delete your account from inside it.</p>
     </div>
+
+    <ul class="chips">
+      <li>No ads</li>
+      <li>No tracking</li>
+      <li>No location</li>
+      <li>Nothing sold</li>
+      <li>Delete anytime</li>
+    </ul>
   </header>
 
   <section>
