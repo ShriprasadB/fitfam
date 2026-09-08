@@ -138,12 +138,15 @@
     flex: none;
   }
 
+  /* The one place the product is named, so it is set the way the product
+     spells itself. No uppercasing: FitFam has a capital in the middle and
+     text-transform destroys it. Wide tracking belongs to caps, so with
+     mixed case it comes back to something close to normal. */
   .masthead .eyebrow {
     font-family: var(--mono);
-    font-size: 0.7rem;
+    font-size: 0.82rem;
     font-weight: 600;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
     color: var(--band-soft);
     margin: 0 0 0.4rem;
   }
