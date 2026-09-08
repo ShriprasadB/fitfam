@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Privacy policy for the Fit Fam iOS app. Fit Fam collects motion data to count steps and never sells or shares it.">
 <title>Fit Fam Privacy Policy</title>
+<meta name="color-scheme" content="light dark">
+<script>
+  // Runs before anything is painted: setting this after render would show
+  // the system theme for a frame and then swap, which reads as a fault.
+  // Wrapped because storage throws outright in some privacy modes.
+  try {
+    var t = localStorage.getItem("fitfam-theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&family=Public+Sans:wght@400;500;600&display=swap">
@@ -156,6 +166,46 @@
     letter-spacing: 0.05em;
     color: var(--band-soft);
     margin: 0.6rem 0 0;
+  }
+
+  .theme-toggle {
+    margin-left: auto;
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--band-ink);
+    background: rgb(255 255 255 / 0.12);
+    border: 1px solid rgb(255 255 255 / 0.22);
+    border-radius: 999px;
+    padding: 0.45rem 0.85rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .theme-toggle:hover { background: rgb(255 255 255 / 0.2); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--band-ink); outline-offset: 2px; }
+
+  .theme-toggle svg { width: 15px; height: 15px; fill: currentColor; flex: none; }
+
+  /* Show the theme being offered, not the one in force. */
+  .theme-toggle .i-sun { display: none; }
+  :root[data-theme="dark"] .theme-toggle .i-sun { display: block; }
+  :root[data-theme="dark"] .theme-toggle .i-moon { display: none; }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme-toggle .i-sun { display: block; }
+    :root:not([data-theme="light"]) .theme-toggle .i-moon { display: none; }
+  }
+
+  @media (max-width: 30rem) {
+    .theme-label { display: none; }
+    .theme-toggle { padding: 0.5rem; }
   }
 
   /* ---- Layout ---- */
@@ -421,7 +471,7 @@
       --band-soft: #444;
     }
     .masthead { background: none; border-bottom: 2px solid #000; padding-left: 0; padding-right: 0; }
-    .toc, .claims, .trail, .mark { display: none; }
+    .toc, .claims, .trail, .mark, .theme-toggle { display: none; }
     body::after { display: none; }
     .layout { display: block; }
     .wrap { max-width: none; padding: 0; }
@@ -442,6 +492,19 @@
       <h1>Privacy Policy</h1>
       <p class="dateline">Last updated 7 September 2026</p>
     </div>
+
+    <button id="theme-toggle" type="button" class="theme-toggle" aria-pressed="false">
+      <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="4.6"/>
+        <g stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+          <path d="M12 2.6v2.4M12 19v2.4M4.2 12H1.8M22.2 12h-2.4M5.9 5.9 4.2 4.2M19.8 19.8l-1.7-1.7M18.1 5.9l1.7-1.7M4.2 19.8l1.7-1.7"/>
+        </g>
+      </svg>
+      <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/>
+      </svg>
+      <span class="theme-label">Dark</span>
+    </button>
   </div>
 </header>
 
@@ -567,6 +630,7 @@
     <p>Fit Fam uses <strong>Firebase</strong>, run by Google LLC, for sign-in, storage and syncing between phones. Your data is stored on Google's servers under that service, and Google processes it on the app's behalf. Google's own handling of it is described in the <a href="https://firebase.google.com/support/privacy" rel="noopener">Firebase privacy documentation</a>.</p>
     <p>Steps and history are also kept on your own iPhone, so the app works without a connection.</p>
     <p>Some things never leave it at all: the detailed record of each stretch of walking, any treadmill incline you declared, and anything read from Apple Health are held on your iPhone only and are not sent to Firebase or anywhere else.</p>
+    <p>This page itself keeps one thing in your browser: whether you chose the light or dark version of it. That preference stays on the device you chose it on, is not a cookie, is not sent anywhere, and identifies nobody.</p>
     <p>Data is kept for as long as you have an account. There is no fixed retention period, because a challenge from last year is part of your history until you decide otherwise.</p>
   </section>
 
@@ -632,5 +696,44 @@
 
 </div>
 
+
+<script>
+  (function () {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+    var label = btn.querySelector(".theme-label");
+    var media = window.matchMedia("(prefers-color-scheme: dark)");
+
+    // What the reader is actually looking at: an explicit choice if one has
+    // been made, otherwise whatever the system is asking for.
+    function current() {
+      var set = document.documentElement.dataset.theme;
+      if (set === "light" || set === "dark") return set;
+      return media.matches ? "dark" : "light";
+    }
+
+    // The button offers the other one, so it is labelled with that.
+    function sync() {
+      var offering = current() === "dark" ? "light" : "dark";
+      if (label) label.textContent = offering === "dark" ? "Dark" : "Light";
+      btn.setAttribute("aria-label", "Switch to " + offering + " theme");
+      btn.setAttribute("aria-pressed", current() === "dark" ? "true" : "false");
+    }
+
+    btn.addEventListener("click", function () {
+      var next = current() === "dark" ? "light" : "dark";
+      document.documentElement.dataset.theme = next;
+      try { localStorage.setItem("fitfam-theme", next); } catch (e) {}
+      sync();
+    });
+
+    // Follow the system until the reader overrides it.
+    media.addEventListener("change", function () {
+      if (!document.documentElement.dataset.theme) sync();
+    });
+
+    sync();
+  })();
+</script>
 </body>
 </html>
