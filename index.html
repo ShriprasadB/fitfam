@@ -11,23 +11,31 @@
 
 <style>
   /* ---------------------------------------------------------------
-     A policy page, not a landing page. The job is that somebody can
-     find one clause and believe it, so the work goes into hierarchy
-     and rhythm rather than ornament. Nothing on this page animates:
-     a legal document that moves reads as a sales pitch.
+     Palette lifted from the app icon rather than invented: two cream
+     footprints on a green gradient, #21955B to #105D39, cream #EBE0C4.
+     The page opens with the app's own face so it is recognisably the
+     same product, then gets out of the way — this is a document to be
+     read and referred to by clause, not a landing page.
      --------------------------------------------------------------- */
 
   :root {
-    --ground: #F3F6F3;
+    --green: #157A4A;
+    --cream: #EBE0C4;
+
+    --ground: #FBF8F1;
     --surface: #FFFFFF;
-    --ink: #0E1A16;
-    --muted: #46564F;
-    --faint: #7C8B84;
-    --line: #DCE4DF;
-    --hairline: #E8EDE9;
-    --accent: #0A7A52;
-    --accent-wash: #E4F1EA;
-    --sunk: #ECF1ED;
+    --ink: #12211A;
+    --muted: #4A5B52;
+    --faint: #7D8C83;
+    --line: #E4E0D3;
+    --hairline: #EDEAE0;
+    --accent: #157A4A;
+    --accent-wash: #E6F0E9;
+    --sunk: #F5F2E9;
+
+    --band: linear-gradient(155deg, #21955B 0%, #105D39 100%);
+    --band-ink: #F7F2E4;
+    --band-soft: rgb(247 242 228 / 0.74);
 
     --display: "Fraunces", Georgia, "Times New Roman", serif;
     --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -36,30 +44,32 @@
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --ground: #0D1412;
-      --surface: #151E1B;
-      --ink: #E9F1EC;
-      --muted: #A5B4AD;
-      --faint: #6E7D77;
-      --line: #263230;
-      --hairline: #1E2926;
-      --accent: #46D999;
-      --accent-wash: #16281F;
-      --sunk: #131C19;
+      --ground: #101A15;
+      --surface: #18241D;
+      --ink: #EFE8D8;
+      --muted: #A9B7AD;
+      --faint: #74857A;
+      --line: #29362D;
+      --hairline: #1F2B24;
+      --accent: #58D08D;
+      --accent-wash: #17291F;
+      --sunk: #14201A;
+      --band: linear-gradient(155deg, #17724A 0%, #0A3B24 100%);
     }
   }
 
   :root[data-theme="dark"] {
-    --ground: #0D1412;
-    --surface: #151E1B;
-    --ink: #E9F1EC;
-    --muted: #A5B4AD;
-    --faint: #6E7D77;
-    --line: #263230;
-    --hairline: #1E2926;
-    --accent: #46D999;
-    --accent-wash: #16281F;
-    --sunk: #131C19;
+    --ground: #101A15;
+    --surface: #18241D;
+    --ink: #EFE8D8;
+    --muted: #A9B7AD;
+    --faint: #74857A;
+    --line: #29362D;
+    --hairline: #1F2B24;
+    --accent: #58D08D;
+    --accent-wash: #17291F;
+    --sunk: #14201A;
+    --band: linear-gradient(155deg, #17724A 0%, #0A3B24 100%);
   }
 
   * { box-sizing: border-box; }
@@ -75,62 +85,134 @@
     text-rendering: optimizeLegibility;
   }
 
-  .wrap {
-    max-width: 44rem;
-    margin: 0 auto;
-    padding: clamp(2.5rem, 7vw, 5rem) clamp(1.2rem, 5vw, 2rem) 5rem;
+  /* ---- Masthead: the app's own face, full bleed ---- */
+
+  .masthead {
+    background: var(--band);
+    color: var(--band-ink);
+    padding: clamp(2.5rem, 7vw, 4rem) clamp(1.2rem, 5vw, 2rem);
   }
 
-  /* ---- Masthead ---- */
+  .masthead-inner {
+    max-width: 62rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: clamp(1.1rem, 3vw, 1.75rem);
+  }
 
-  header { margin-bottom: 3.5rem; }
+  .mark {
+    width: clamp(60px, 12vw, 84px);
+    height: auto;
+    border-radius: 23%;
+    box-shadow: 0 4px 18px rgb(0 0 0 / 0.25);
+    flex: none;
+  }
 
-  .eyebrow {
+  .masthead .eyebrow {
     font-family: var(--mono);
     font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
+    color: var(--band-soft);
+    margin: 0 0 0.4rem;
   }
 
-  .eyebrow::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-  }
-
-  h1 {
+  .masthead h1 {
     font-family: var(--display);
-    font-weight: 700;
+    font-weight: 600;
     font-variation-settings: "opsz" 144;
-    font-size: clamp(2.3rem, 7vw, 3.5rem);
+    font-size: clamp(2rem, 6vw, 3.1rem);
     line-height: 1.02;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.028em;
     margin: 0;
+    color: var(--band-ink);
     text-wrap: balance;
   }
 
-  .dateline {
+  .masthead .dateline {
     font-family: var(--mono);
-    font-size: 0.76rem;
-    letter-spacing: 0.06em;
-    color: var(--faint);
-    margin: 1rem 0 0;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    color: var(--band-soft);
+    margin: 0.6rem 0 0;
   }
 
+  /* ---- Layout ---- */
+
+  .wrap {
+    max-width: 62rem;
+    margin: 0 auto;
+    padding: clamp(2.25rem, 5vw, 3.5rem) clamp(1.2rem, 5vw, 2rem) 4rem;
+  }
+
+  .layout { display: block; }
+  main { min-width: 0; }
+
+  /* The contents list earns the gutter a narrow measure leaves empty,
+     and an eleven-clause policy is genuinely referred to by number. */
+  .toc { display: none; }
+
+  @media (min-width: 62rem) {
+    .layout {
+      display: grid;
+      grid-template-columns: 12.5rem minmax(0, 1fr);
+      gap: 3.5rem;
+      align-items: start;
+    }
+    .toc {
+      display: block;
+      position: sticky;
+      top: 2rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  .toc-title {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 0 0 0.75rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .toc ol { list-style: none; margin: 0; padding: 0; }
+
+  .toc a {
+    display: flex;
+    gap: 0.6rem;
+    padding: 0.3rem 0;
+    color: var(--muted);
+    text-decoration: none;
+    line-height: 1.35;
+    border-radius: 3px;
+  }
+  .toc a:hover { color: var(--accent); }
+  .toc a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .tnum {
+    font-family: var(--mono);
+    font-size: 0.67rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--faint);
+    padding-top: 0.2em;
+    flex: none;
+  }
+
+  /* ---- The short version ---- */
+
   .summary {
-    margin: 2rem 0 0;
-    padding: 1.4rem 1.5rem;
+    margin: 0;
+    padding: 1.4rem 1.55rem;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 8px;
-    box-shadow: 0 1px 2px rgb(0 0 0 / 0.03);
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
     color: var(--muted);
     font-size: 1rem;
   }
@@ -139,84 +221,83 @@
   .summary p:last-child { margin-bottom: 0; }
   .summary strong { color: var(--ink); font-weight: 600; }
 
-  /* The four refusals, surfaced before the detail that proves them.
-     Every one of these is stated in full in section 3. */
   .chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 1.25rem 0 0;
+    gap: 0.45rem;
+    margin: 1.1rem 0 0;
     padding: 0;
     list-style: none;
   }
 
   .chips li {
     font-family: var(--mono);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 500;
-    letter-spacing: 0.03em;
     color: var(--accent);
     background: var(--accent-wash);
+    border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
     border-radius: 999px;
-    padding: 0.3rem 0.7rem;
+    padding: 0.28rem 0.7rem;
     white-space: nowrap;
+  }
+
+  /* The app's own motif, used once rather than sprinkled. */
+  .trail {
+    display: block;
+    width: 200px;
+    height: auto;
+    margin: 2.75rem 0 0;
+    color: var(--accent);
+    opacity: 0.34;
   }
 
   /* ---- Sections ---- */
 
   section {
-    position: relative;
-    margin-top: 3rem;
+    margin-top: 2.75rem;
     padding-top: 2rem;
     border-top: 1px solid var(--hairline);
+    scroll-margin-top: 1.5rem;
   }
 
   h2 {
     font-family: var(--display);
     font-weight: 600;
     font-variation-settings: "opsz" 40;
-    font-size: 1.45rem;
-    line-height: 1.25;
+    font-size: 1.5rem;
+    line-height: 1.22;
     letter-spacing: -0.015em;
     color: var(--ink);
     margin: 0 0 1rem;
     text-wrap: balance;
     display: flex;
     align-items: baseline;
-    gap: 0.7rem;
+    gap: 0.75rem;
   }
 
   h2 .num {
     flex: none;
     font-family: var(--mono);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 600;
     font-variant-numeric: tabular-nums;
-    color: var(--accent);
-    letter-spacing: 0.04em;
-  }
-
-  /* On a wide screen the numbers step down the margin, so the page can
-     be scanned by clause the way a policy is actually referred to. */
-  @media (min-width: 60rem) {
-    section { padding-left: 4rem; }
-    h2 { display: block; }
-    h2 .num {
-      position: absolute;
-      left: 0;
-      top: 2.35rem;
-      font-size: 0.78rem;
-    }
+    color: var(--band-ink);
+    background: var(--accent);
+    border-radius: 5px;
+    padding: 0.16rem 0.44rem;
+    position: relative;
+    top: -0.18em;
   }
 
   h3 {
     font-family: var(--body);
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    letter-spacing: 0.09em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--ink);
-    margin: 2rem 0 0.6rem;
+    margin: 2rem 0 0.65rem;
     padding-left: 0.75rem;
     border-left: 2px solid var(--accent);
   }
@@ -228,61 +309,43 @@
   section > ul > li {
     position: relative;
     margin-bottom: 0.8rem;
-    padding-left: 1.4rem;
+    padding-left: 1.45rem;
     color: var(--muted);
   }
   section > ul > li::before {
     content: "";
     position: absolute;
-    left: 0.15rem;
-    top: 0.72em;
-    width: 0.4rem;
-    height: 0.4rem;
+    left: 0.2rem;
+    top: 0.68em;
+    width: 0.42rem;
+    height: 0.42rem;
     border-radius: 50%;
     background: var(--accent);
-    opacity: 0.55;
+    opacity: 0.6;
   }
   li strong { color: var(--ink); font-weight: 600; }
 
-  a {
-    color: var(--accent);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-  }
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
   a:hover { text-decoration-thickness: 2px; }
-  a:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
-  /* ---- The collection table ---- */
+  /* ---- Table ---- */
 
   .table-wrap {
     overflow-x: auto;
     margin: 0 0 1rem;
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: 10px;
     background: var(--surface);
   }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.94rem;
-    min-width: 26rem;
-  }
-
-  th, td {
-    text-align: left;
-    padding: 0.8rem 1rem;
-    vertical-align: top;
-  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.94rem; min-width: 26rem; }
+  th, td { text-align: left; padding: 0.82rem 1rem; vertical-align: top; }
 
   thead th {
     font-family: var(--mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.12em;
+    font-size: 0.66rem;
+    letter-spacing: 0.13em;
     text-transform: uppercase;
     color: var(--faint);
     font-weight: 600;
@@ -293,20 +356,17 @@
   tbody tr + tr td { border-top: 1px solid var(--hairline); }
   td:first-child { color: var(--ink); font-weight: 600; }
   td:last-child { color: var(--muted); }
-
-  @media (min-width: 34rem) {
-    td:first-child { white-space: nowrap; }
-  }
+  @media (min-width: 34rem) { td:first-child { white-space: nowrap; } }
 
   /* ---- Footer ---- */
 
   footer {
-    margin-top: 4rem;
+    margin-top: 3.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid var(--line);
     color: var(--faint);
     font-family: var(--mono);
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     line-height: 1.7;
     letter-spacing: 0.03em;
   }
@@ -314,14 +374,17 @@
   /* A policy is a thing people print and file. */
   @media print {
     :root {
-      --ground: #FFF; --surface: #FFF; --ink: #000;
-      --muted: #222; --faint: #555; --line: #BBB; --hairline: #DDD;
-      --accent: #000; --accent-wash: #FFF; --sunk: #F4F4F4;
+      --ground: #FFF; --surface: #FFF; --ink: #000; --muted: #222;
+      --faint: #555; --line: #BBB; --hairline: #DDD; --accent: #000;
+      --accent-wash: #FFF; --sunk: #F4F4F4; --band: none; --band-ink: #000;
+      --band-soft: #444;
     }
+    .masthead { background: none; border-bottom: 2px solid #000; padding-left: 0; padding-right: 0; }
+    .toc, .chips, .trail, .mark { display: none; }
+    .layout { display: block; }
     .wrap { max-width: none; padding: 0; }
-    section { break-inside: avoid; padding-left: 0; }
-    h2 .num { position: static; }
-    .chips { display: none; }
+    section { break-inside: avoid; }
+    h2 .num { background: none; color: #000; padding: 0; }
     a { text-decoration: underline; }
   }
 </style>
@@ -329,33 +392,69 @@
 <body>
 
 
-<div class="wrap">
-
-  <header>
-    <p class="eyebrow">Fit Fam &middot; Privacy</p>
-    <h1>Fit Fam Privacy Policy</h1>
-    <p class="dateline">Last updated 7 September 2026</p>
-
-    <div class="summary">
-      <p><strong>The short version.</strong> Fit Fam counts your steps and shares your progress with the people you are competing against. That is all it is for.</p>
-      <p>Nothing is sold, nothing is shared with advertisers, and there are no third-party trackers or analytics in the app. You can delete your account from inside it.</p>
+<header class="masthead">
+  <div class="masthead-inner">
+    <img class="mark" src="icon.png" width="76" height="76" alt="" aria-hidden="true">
+    <div>
+      <p class="eyebrow">Fit Fam</p>
+      <h1>Privacy Policy</h1>
+      <p class="dateline">Last updated 7 September 2026</p>
     </div>
+  </div>
+</header>
 
-    <ul class="chips">
-      <li>No ads</li>
-      <li>No tracking</li>
-      <li>No location</li>
-      <li>Nothing sold</li>
-      <li>Delete anytime</li>
-    </ul>
-  </header>
+<div class="wrap">
+  <div class="layout">
 
-  <section>
+    <nav class="toc" aria-label="Contents">
+      <p class="toc-title">Contents</p>
+      <ol>
+        <li><a href="#who-this-is"><span class="tnum">1</span>Who this is</a></li>
+        <li><a href="#what-fit-fam-collects"><span class="tnum">2</span>What Fit Fam collects</a></li>
+        <li><a href="#what-fit-fam-does-not-do"><span class="tnum">3</span>What Fit Fam does not do</a></li>
+        <li><a href="#who-can-see-what"><span class="tnum">4</span>Who can see what</a></li>
+        <li><a href="#where-the-data-is-kept"><span class="tnum">5</span>Where the data is kept</a></li>
+        <li><a href="#reporting-and-blocking"><span class="tnum">6</span>Reporting and blocking</a></li>
+        <li><a href="#deleting-your-account"><span class="tnum">7</span>Deleting your account</a></li>
+        <li><a href="#your-rights"><span class="tnum">8</span>Your rights</a></li>
+        <li><a href="#children"><span class="tnum">9</span>Children</a></li>
+        <li><a href="#changes-to-this-policy"><span class="tnum">10</span>Changes to this policy</a></li>
+        <li><a href="#contact"><span class="tnum">11</span>Contact</a></li>
+      </ol>
+    </nav>
+
+    <main>
+      <div class="summary">
+        <p><strong>The short version.</strong> Fit Fam counts your steps and shares your progress with the people you are competing against. That is all it is for.</p>
+        <p>Nothing is sold, nothing is shared with advertisers, and there are no third-party trackers or analytics in the app. You can delete your account from inside it.</p>
+      </div>
+
+      <ul class="chips">
+        <li>No ads</li>
+        <li>No tracking</li>
+        <li>No location</li>
+        <li>Nothing sold</li>
+        <li>Delete anytime</li>
+      </ul>
+
+      <svg class="trail" viewBox="0 0 240 36" aria-hidden="true" focusable="false">
+        <g fill="currentColor">
+          <ellipse cx="14" cy="11" rx="7" ry="9"/><ellipse cx="15" cy="23" rx="5" ry="4.5"/>
+          <ellipse cx="52" cy="21" rx="7" ry="9"/><ellipse cx="53" cy="33" rx="5" ry="4.5"/>
+          <ellipse cx="90" cy="11" rx="7" ry="9"/><ellipse cx="91" cy="23" rx="5" ry="4.5"/>
+          <ellipse cx="128" cy="21" rx="7" ry="9"/><ellipse cx="129" cy="33" rx="5" ry="4.5"/>
+          <ellipse cx="166" cy="11" rx="7" ry="9"/><ellipse cx="167" cy="23" rx="5" ry="4.5"/>
+          <ellipse cx="204" cy="21" rx="7" ry="9"/><ellipse cx="205" cy="33" rx="5" ry="4.5"/>
+        </g>
+      </svg>
+
+
+  <section id="who-this-is">
     <h2><span class="num">1</span>Who this is</h2>
     <p>Fit Fam is an iPhone app made and run by an individual developer, not a company. Questions about anything on this page can go to <a href="mailto:fitfamsupport@gmail.com">fitfamsupport@gmail.com</a>, and they will be answered by the person who wrote the app.</p>
   </section>
 
-  <section>
+  <section id="what-fit-fam-collects">
     <h2><span class="num">2</span>What Fit Fam collects</h2>
     <p>Only what a step-counting app between friends actually needs. Every item below exists to make some part of the app work — nothing is collected in case it turns out to be useful later.</p>
 
@@ -410,7 +509,7 @@
     <p>On a treadmill you can tell the app the incline, because a moving belt gains no height and no sensor can detect it. That figure affects your calorie estimate only — it cannot change your steps, your distance, or anything a challenge is decided on — and it stays on your iPhone with the rest of your activity history.</p>
   </section>
 
-  <section>
+  <section id="what-fit-fam-does-not-do">
     <h2><span class="num">3</span>What Fit Fam does not do</h2>
     <ul>
       <li><strong>No advertising, and no advertising identifiers.</strong> The app shows no ads and does not ask for permission to track you across other apps or websites, because it has no use for it.</li>
@@ -421,7 +520,7 @@
     </ul>
   </section>
 
-  <section>
+  <section id="who-can-see-what">
     <h2><span class="num">4</span>Who can see what</h2>
     <p>Fit Fam is a social app, so some of what it holds is deliberately visible to other people — but only to the people in a challenge with you.</p>
     <ul>
@@ -431,7 +530,7 @@
     </ul>
   </section>
 
-  <section>
+  <section id="where-the-data-is-kept">
     <h2><span class="num">5</span>Where the data is kept</h2>
     <p>Fit Fam uses <strong>Firebase</strong>, run by Google LLC, for sign-in, storage and syncing between phones. Your data is stored on Google's servers under that service, and Google processes it on the app's behalf. Google's own handling of it is described in the <a href="https://firebase.google.com/support/privacy" rel="noopener">Firebase privacy documentation</a>.</p>
     <p>Steps and history are also kept on your own iPhone, so the app works without a connection.</p>
@@ -439,13 +538,13 @@
     <p>Data is kept for as long as you have an account. There is no fixed retention period, because a challenge from last year is part of your history until you decide otherwise.</p>
   </section>
 
-  <section>
+  <section id="reporting-and-blocking">
     <h2><span class="num">6</span>Reporting and blocking</h2>
     <p>If you report a message, a copy of that message and the accounts involved are sent to the developer so it can be looked at. Reports cannot be read by anyone using the app — not even by the person who filed one — and the person reported is not told.</p>
     <p>Blocking someone is private to you. They are not notified, and it does not remove them from a challenge or change anyone's score.</p>
   </section>
 
-  <section>
+  <section id="deleting-your-account">
     <h2><span class="num">7</span>Deleting your account</h2>
     <p>You can delete your account at any time from <strong>Profile → Account → Delete account</strong>. It is immediate and cannot be undone.</p>
     <p>What is removed:</p>
@@ -464,25 +563,28 @@
     <p>If you want something removed that this does not cover, write to <a href="mailto:fitfamsupport@gmail.com">fitfamsupport@gmail.com</a>.</p>
   </section>
 
-  <section>
+  <section id="your-rights">
     <h2><span class="num">8</span>Your rights</h2>
     <p>Depending on where you live you may have the right to ask what is held about you, to have it corrected, or to have it deleted. Deletion is built into the app; for anything else, email <a href="mailto:fitfamsupport@gmail.com">fitfamsupport@gmail.com</a> and it will be dealt with.</p>
   </section>
 
-  <section>
+  <section id="children">
     <h2><span class="num">9</span>Children</h2>
     <p>Fit Fam is not directed at children under 13, and accounts are not knowingly created for them. The app carries chat and photo sharing between the people in a challenge, which is why it is rated for older users. If you believe a child has an account, email the address above and it will be removed.</p>
   </section>
 
-  <section>
+  <section id="changes-to-this-policy">
     <h2><span class="num">10</span>Changes to this policy</h2>
     <p>If what the app collects changes, this page changes with it, and the date at the top is updated. Material changes will also be mentioned in the app.</p>
   </section>
 
-  <section>
+  <section id="contact">
     <h2><span class="num">11</span>Contact</h2>
     <p>For anything on this page: <a href="mailto:fitfamsupport@gmail.com">fitfamsupport@gmail.com</a>.</p>
   </section>
+
+    </main>
+  </div>
 
   <footer>
     Fit Fam collects motion data to count steps and never sells or shares it.
